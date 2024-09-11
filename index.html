@@ -7,12 +7,100 @@
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/c3e5666a66.js" crossorigin="anonymous"></script>
     <!-- css -->
-
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/design.css">
-    <link rel="stylesheet" type="text/css" href="css/animation.css">    <!-- 상대경로 -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',path='/css/common.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',path='/css/design.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',path='/css/animation.css')}}">    <!-- 상대경로 -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', path='/img/favicon.ico') }}" >
 </head>
+
 <body>
+    <div class="top_btn fix_btn"><i class="fas fa-arrow-up"></i></div>
+<div class="chatbot_btn fix_btn"><i class="fas fa-robot"></i></div>
+<div class="chatbot_close_btn fix_btn" onclick="close_chatbot()"><i class="fas fa-times"></i></div>
+<div class="kakao_btn fix_btn"><i class="fas fa-comment"></i></div>
+<div class="kakao_close_btn fix_btn" onclick="close_kakao()"><i class="fas fa-times"></i></div>
+
+<!--Chatbot-->
+<div class="window_wrap" id="chatbot_wrap">
+    <div class="window_title">
+        <div>
+            <i class="fas fa-robot"></i>
+            <span>CHATBOT</span>
+        </div>
+        <div class="window_close_btn" id="chatbot_window_close" onclick="close_chatbot()"><i class="fas fa-times"></i></div>
+    </div>
+    <div class="chatbot_box">
+        <div class="msg_box">
+            <div class="chat_msg_box">
+                <div class="chat_msg_box_left">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chat_msg_box_right">
+                    <span class="chat_msg_date"></span>
+                    <span class="chat_msg_info">Hello, I'm Gaeun. 무엇이든 물어보세요. </span>
+                </div>
+            </div>    
+        </div>
+        <div class="msg_input">
+            <input id="send_chat_input" type="text" onkeypress="enter_keypress(event)"></input>
+            <button id="send_chat_btn" type="button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- KakaoTalk -->
+<div class="window_wrap" id="kakao_wrap">
+    <div class="window_title">
+        <div >
+            <i class="fas fa-comment"></i>
+            <span>KAKAOTALK</span>
+        </div>
+        <div class="window_close_btn" id="kakao_window_close" onclick="close_kakao()"><i class="fas fa-times"></i></div>
+    </div>
+    <div class="kakao_box">
+        <div class="msg_box" id="kakao_msg_box">
+            <div class="kakao_msg_info">연락을 원하시면 언제든지 메세지를 보내주세요.</div>
+            <form id="kakao_form">
+                <div class="kakao_input_area">
+                    <div class="kakao_input_box">
+                        <input type="text" name="kakao_name" class="kakao_input" id="kakao_name">
+                        <label for="kakao_name" class="kakao_input_label">NAME</label>
+                    </div>
+                    <div class="kakao_input_box">
+                        <input type="text" name="kakao_email" class="kakao_input" id="kakao_email">
+                        <label for="kakao_email" class="kakao_input_label">EMAIL</label>
+                    </div>
+                    <div class="kakao_input_box">
+                        <input type="text" name="kakao_message" class="kakao_input" id="kakao_message">
+                        <label for="kakao_message" class="kakao_input_label">MESSAGE</label>
+                    </div>
+                    <button type="button" id="send_kakao_btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.998 4c-5.387 0-9.753 3.443-9.753 7.69 0 2.746 1.826 5.158 4.572 6.516-.15.515-.96 3.314-.992 3.535 0 0-.02.165.087.227a.295.295 0 00.232.015c.308-.044 3.564-2.327 4.127-2.72.572.08 1.15.118 1.727.117 5.387 0 9.754-3.443 9.754-7.69S17.384 4 11.998 4z" fill="#000", fill-opacity=".9"></path>
+                        </svg>
+                        카카오톡 보내기
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="wrap">
         <!-- 명함 -->
         <div class="common_box card_box">
@@ -23,7 +111,7 @@
                     <!-- 영문이름 -->
                     <span class="name_eng">Choi Ga Eun</span>
                     <!-- 직업 -->
-                    <span class="job">데  이  터  엔  지  니  어</span>
+                    <span class="job">앱 개발자</span>
                 </div>
                 <div class="item_list">
                     <div class="item_type">
@@ -64,22 +152,22 @@
                 <div class="sub_title">Skills</div>
                 <div class="bar_wrap">
                     <div class="skill_title"><strong>웹 프로그래밍</strong></div>
-                    <div><div class="bar_border"><div class="bar_fill" style="width: 10%">10%</div></div></div>
+                    <div><div class="bar_border"><div class="bar_fill" style="width: 10%">60%</div></div></div>
                 </div>
 
                 <div class="bar_wrap">
                     <div class="skill_title"><strong>데이터베이스</strong></div>
-                    <div><div class="bar_border"><div class="bar_fill" style="width: 10%">10%</div></div></div>
+                    <div><div class="bar_border"><div class="bar_fill" style="width: 10%">30%</div></div></div>
                 </div>
             
                 <div class="bar_wrap">
                     <div class="skill_title"><strong>서버</strong></div>
-                    <div><div class="bar_border"><div class="bar_fill" style="width: 10%">10%</div></div></div>
+                    <div><div class="bar_border"><div class="bar_fill" style="width: 10%">50%</div></div></div>
                 </div>
 
                 <div class="bar_wrap">
                     <div class="skill_title"><strong>Git</strong></div>
-                    <div><div class="bar_border"><div class="bar_fill" style="width: 10%">10%</div></div></div>
+                    <div><div class="bar_border"><div class="bar_fill" style="width: 10%">40%</div></div></div>
                 </div>
             </div>
 
@@ -93,9 +181,10 @@
                         <span>+ </span>
                     </div>
                     <div>
-                        <span>컴활</span>
-                        <span>한국사</span>
-                        <span>토익</span>
+                        <span>운전 면허</span>
+                        <span>컴퓨터활용능력 1급 (예정)</span>
+                        <span>데이터분석준전문가 (ADsP)</span>
+                        <span></span>
                     </div>
                 </div>
             </div>
@@ -109,7 +198,8 @@
 
                     </div>
                     <div>
-                        <span>비밀의화원</span>
+                        <span>배스킨라빈스 21.03 ~ 21.09</span>
+                        <span>방탈출 카페 22.12 ~ 24.04</span>
 
                     </div>
                 </div>
@@ -125,7 +215,8 @@
                     </div>
                     <div>
                         <span>대학교 정규수업</span>
-                        <span>nhn 아카데미 자바스터디</span>
+                        <span>정보보안 전문인력 양성과정(Women@Security)</span>
+                        <span>Groom 2기 AI 기본과정</span>
                     </div>
                 </div>
             </div>
@@ -140,11 +231,17 @@
                     </div>
                     <div>
                         <span>아두이노 프로젝트</span>
-                        <span>캡스톤 디자인</span>
+                        <span>2024-1 캡스톤 디자인 <타시요 어플제작> </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{url_for('static', path='/js/fnc.js')}}"></script>
+
+
+
+
 </html>
